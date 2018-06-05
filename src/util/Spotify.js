@@ -1,14 +1,17 @@
 let userToken = '';
-const client_id = '02829885ac4a43d687963cfc747cc72f';
-const response_type = 'token';
-const redirect_uri = 'http://localhost:3000/';
+const urlStart = 'https://accounts.spotify.com/authorize?'
+const clientId = 'client_id=02829885ac4a43d687963cfc747cc72f&';
+const responseType = 'response_type=token&';
+const redirectUri = 'redirect_uri=http://localhost:3000/';
+const redirect = urlStart + clientId + responseType + redirectUri;
 
 const Spotify = {
-  getAccessToken(client_id, response_type, redirect_uri, state) {
+  getAccessToken() {
     if (userToken) {
       return userToken;
     } else {
-      return fetch('https://accounts.spotify.com/authorize')
+      window.location = url;
+      window.location.href.match()
     }
   };
 }
