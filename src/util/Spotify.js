@@ -1,11 +1,11 @@
 let accessToken = '';
 let expiresIn = '';
-const urlStart = 'https://accounts.spotify.com/authorize?'
-const clientId = 'client_id=02829885ac4a43d687963cfc747cc72f&';
-const responseType = 'response_type=token&';
-const scope = 'scope=playlist-modify-public&'
+const urlStart = 'https://accounts.spotify.com/authorize'
+const clientId = 'client_id=02829885ac4a43d687963cfc747cc72f';
+const responseType = 'response_type=token';
+const scope = 'scope=playlist-modify-public'
 const redirectUri = 'redirect_uri=http://localhost:3000/';
-const redirect = `${urlStart}${clientId}${responseType}${scope}${redirectUri}`;
+const redirect = `${urlStart}?${clientId}&${responseType}&${scope}&${redirectUri}`;
 
 const Spotify = {
   getAccessToken() {
