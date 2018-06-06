@@ -15,8 +15,10 @@ const Spotify = {
       return accessToken;
     } else if (window.location.href.match(/access_token=([^&]*)/) &&
   window.location.href.match(/expires_in=([^&]*)/)) {
-      accessToken = window.location.href.match(/access_token=([^&]*)/).join('').substring(13);
-      expiresIn = window.location.href.match(/expires_in=([^&]*)/).join('').substring(11);
+      let preAccessToken = window.location.href.match(/access_token=([^&]*)/);
+      accessToken = preAccessToken[1];
+      let preExpiresIn = window.location.href.match(/expires_in=([^&]*)/);
+      expiresIn = preExpiresIn[1];
       window.setTimeout(() => accessToken = '', expiresIn * 1000);
       window.history.pushState('Access Token', null, '/');
       return accessToken;
