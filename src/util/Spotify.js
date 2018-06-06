@@ -23,7 +23,7 @@ const Spotify = {
     } else {
       window.location = redirect;
     }
-  }
+  },
 
   search(searchTerm) {
     return fetch(`${searchUrl}${searchTerm}`, {
@@ -32,7 +32,7 @@ const Spotify = {
       return response.json();
     }).then(jsonResponse => {
       if (jsonResponse.tracks) {
-        jsonResponse.tracks.map(track => {
+        return jsonResponse.tracks.map(track => ({
           id: track.id,
           name: track.name,
           artist: track.artists[0].name,
