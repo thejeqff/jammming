@@ -57,7 +57,6 @@ const Spotify = {
       headers: {
         Authorization: `Bearer ${currentAccessToken}`
       }
-    })
     }).then(response => {
       return response.json();
     }).then(jsonResponse => {
