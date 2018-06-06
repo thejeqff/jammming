@@ -59,7 +59,6 @@ class App extends React.Component {
   }
 
   search(searchTerm) {
-    Spotify.getAccessToken();
     Spotify.search(searchTerm).then(results => {
       this.setState({
         searchResults: results
