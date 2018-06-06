@@ -23,20 +23,8 @@ const Spotify = {
     } else {
       window.location = redirect;
     }
-  }
+  },
 
-<<<<<<< HEAD
-  search: async (searchTerm) => {
-    try {
-      const response = await fetch(`${searchUrl}${searchTerm}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      })
-      if (response.ok) {
-        const jsonResponse = await response.json();
-        return jsonResponse.tracks.items.map(track => ({
-=======
   search(searchTerm) {
     return fetch(`${searchUrl}${searchTerm}`, {
       Authorization: `Bearer ${accessToken}`
@@ -45,19 +33,15 @@ const Spotify = {
     }).then(jsonResponse => {
       if (jsonResponse.tracks) {
         jsonResponse.tracks.map(track => {
->>>>>>> parent of 56e914a... Added savePlaylist functionality in Spotify.js and App.js
           id: track.id,
           name: track.name,
           artist: track.artists[0].name,
           album: track.album.name,
           uri: track.uri
-<<<<<<< HEAD
         }));
       } else {
         return [];
       }
-    } catch (error) {
-      console.log(error);
     }
   },
 
@@ -130,10 +114,3 @@ const Spotify = {
 }
 
 export default Spotify;
-=======
-        })
-      }
-    })
-  }
-}
->>>>>>> parent of 56e914a... Added savePlaylist functionality in Spotify.js and App.js

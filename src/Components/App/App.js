@@ -64,15 +64,12 @@ class App extends React.Component {
   }
 
   search(searchTerm) {
-<<<<<<< HEAD
+
     Spotify.search(searchTerm).then(results => {
       this.setState({
         searchResults: results
       });
     });
-=======
-    console.log(searchTerm);
->>>>>>> parent of 56e914a... Added savePlaylist functionality in Spotify.js and App.js
   }
 
   render() {
