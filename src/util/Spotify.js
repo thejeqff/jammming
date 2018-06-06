@@ -15,8 +15,8 @@ const Spotify = {
       return accessToken;
     } else if (window.location.href.match(/access_token=([^&]*)/) &&
   window.location.href.match(/expires_in=([^&]*)/)) {
-      accessToken = window.location.href.match(/access_token=([^&]*)/).join('').substring(13,-1);
-      expiresIn = window.location.href.match(/expires_in=([^&]*)/).join('').substring(11,-1);
+      accessToken = window.location.href.match(/access_token=([^&]*)/).join('').substring(13);
+      expiresIn = window.location.href.match(/expires_in=([^&]*)/).join('').substring(11);
       window.setTimeout(() => accessToken = '', expiresIn * 1000);
       window.history.pushState('Access Token', null, '/');
       return accessToken;
@@ -31,7 +31,15 @@ const Spotify = {
     }).then(response => {
       return response.json();
     }).then(jsonResponse => {
-      if (jsonResponse.track)
+      if (jsonResponse.tracks) {
+        jsonResponse.tracks.map(track => {
+          id: track.id,
+          name: track.name,
+          artist: track.artists[0].name,
+          album: track.album.name,
+          uri: track.uri
+        })
+      }
     })
   }
 }
