@@ -108,12 +108,11 @@ const Spotify = {
     if (response.ok) {
       const jsonResponse = response.json();
       return jsonResponse;
+      }
+    } catch(error) {
+      console.log(error)
     }
-  } catch(error) {
-    console.log(error)
   }
 }
-}
-
 
 export default Spotify;
