@@ -57,10 +57,10 @@ const Spotify = {
 
     try {
       const response = await fetch('https://api.spotify.com/v1/me', {
-      headers: {
-        Authorization: `Bearer ${currentAccessToken}`
-      }
-    })
+        headers: {
+          Authorization: `Bearer ${currentAccessToken}`
+        }
+      })
     if (response.ok) {
       const jsonResponse = await response.json();
       userId = jsonResponse.id;
@@ -87,9 +87,9 @@ const Spotify = {
       const jsonResponse = await response.json();
       playlistID = jsonResponse.id;
       console.log(playlistID);
-    } catch(error) {
-      console.log(error);
     }
+  } catch(error) {
+      console.log(error);
   }
 
   console.log(playlistID);
@@ -104,7 +104,7 @@ const Spotify = {
       body: {
         uris: trackURIs
       }
-    }
+    })
     if (response.ok) {
       const jsonResponse = response.json();
       return jsonResponse;
@@ -112,6 +112,7 @@ const Spotify = {
   } catch(error) {
     console.log(error)
   }
+}
 }
 
 
