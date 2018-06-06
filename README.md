@@ -1,1 +1,1 @@
-This project is the capstone project for the Codecademy Pro Intensive on Building Front-End Web Applications. This application, Jammming, is an app tha allows users to search for songs in the Spotify library, add them to a playlist, then save that playlist to their Spotify user library.
+This project is the capstone project for the Codecademy Pro Intensive on Building Front-End Web Applications. This application, Jammming, is an app that allows users to search for songs in the Spotify library, add them to a playlist, then save that playlist to their Spotify user library.
