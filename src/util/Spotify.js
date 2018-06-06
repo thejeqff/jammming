@@ -57,36 +57,42 @@ const Spotify = {
     let userId = '';
     let playlistID = '';
 
-    fetch('https://api.spotify.com/v1/me', {
-      headers: {
-        Authorization: `Bearer ${currentAccessToken}`
-      }
-    }).then(response => {
-      return response.json();
-    }).then(jsonResponse => {
-      if (jsonResponse) {
+    try {
+      const response = await fetch('https://api.spotify.com/v1/me', {
+        headers: {
+          Authorization: `Bearer ${currentAccessToken}`
+        }
+      });
+      if (response.ok) {
+        const jsonResponse = await response.json();
         userId = jsonResponse.id;
         console.log(userId)
+        }
+      } catch(error) {
+        console.log(error);
       }
-    });
 
     console.log(userId);
 
-    fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
-      headers: {
-        Authorization: `Bearer ${currentAccessToken}`,
-        'Content-type': 'application/json'
-      },
-      body: {
-        name: playlistName
-      },
-      method: 'POST'
-    }).then(response => {
-      return response.json();
-    }).then(jsonResponse => {
-      playlistID = jsonResponse.id;
-      console.log(playlistID);
-    });
+    try {
+      const response = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+        headers: {
+          Authorization: `Bearer ${currentAccessToken}`,
+          'Content-type': 'application/json'
+        },
+        body: {
+          name: playlistName
+        },
+        method: 'POST'
+      })
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        playlistID = jsonResponse.id;
+        console.log(playlistID);
+      } catch(error) {
+        console.log(error);
+      }
+    }
 
     console.log(playlistID);
 
