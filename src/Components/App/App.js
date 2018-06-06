@@ -3,15 +3,24 @@ import './App.css';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { SearchResults } from '../SearchResults/SearchResults';
 import { Playlist } from '../Playlist/Playlist';
-import Spotify from '../../util/Spotify.js'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults: [],
-      playlistName: 'New Playlist',
-      playlistTracks: []
+      searchResults: [{
+        name: 'Welcome to Paradise',
+        artist: 'Green Day',
+        album: 'Kerplunk!',
+        id: '1'
+      }],
+      playlistName: 'Playlist Name',
+      playlistTracks: [{
+        name: 'Drifting',
+        artist: 'Andy McKee',
+        album: 'Art of Motion',
+        id: '2'
+      }]
     }
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
@@ -50,20 +59,20 @@ class App extends React.Component {
   }
 
   savePlaylist() {
-    const trackURIs = this.state.playlistTracks.map(track => {return track.uri});
-    Spotify.savePlaylist(this.state.playlistName, trackURIs);
-    this.setState({
-      playlistName: 'New Playlist',
-      playlistTracks: []
-    })
+    const trackURIS = this.state.playlistTracks.map(track => {return track.uri});
+    return trackURIS;
   }
 
   search(searchTerm) {
+<<<<<<< HEAD
     Spotify.search(searchTerm).then(results => {
       this.setState({
         searchResults: results
       });
     });
+=======
+    console.log(searchTerm);
+>>>>>>> parent of 56e914a... Added savePlaylist functionality in Spotify.js and App.js
   }
 
   render() {

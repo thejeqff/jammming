@@ -7,7 +7,7 @@ const scope = 'scope=playlist-modify-public'
 const redirectUri = 'redirect_uri=http://localhost:3000/';
 const redirect = `${urlStart}?${clientId}&${responseType}&${scope}&${redirectUri}`;
 
-const searchUrl = 'https://api.spotify.com/v1/search?type=track&q=';
+const searchUrl = 'https://api.spotify.com/v1/search?type=track&q='
 
 const Spotify = {
   getAccessToken() {
@@ -15,18 +15,17 @@ const Spotify = {
       return accessToken;
     } else if (window.location.href.match(/access_token=([^&]*)/) &&
   window.location.href.match(/expires_in=([^&]*)/)) {
-      let accessPreToken = window.location.href.match(/access_token=([^&]*)/);
-      accessToken = accessPreToken[1];
-      let preExpiresIn = window.location.href.match(/expires_in=([^&]*)/);
-      expiresIn = preExpiresIn[1];
+      accessToken = window.location.href.match(/access_token=([^&]*)/).join('').substring(13);
+      expiresIn = window.location.href.match(/expires_in=([^&]*)/).join('').substring(11);
       window.setTimeout(() => accessToken = '', expiresIn * 1000);
       window.history.pushState('Access Token', null, '/');
       return accessToken;
     } else {
       window.location = redirect;
     }
-  },
+  }
 
+<<<<<<< HEAD
   search: async (searchTerm) => {
     try {
       const response = await fetch(`${searchUrl}${searchTerm}`, {
@@ -37,11 +36,22 @@ const Spotify = {
       if (response.ok) {
         const jsonResponse = await response.json();
         return jsonResponse.tracks.items.map(track => ({
+=======
+  search(searchTerm) {
+    return fetch(`${searchUrl}${searchTerm}`, {
+      Authorization: `Bearer ${accessToken}`
+    }).then(response => {
+      return response.json();
+    }).then(jsonResponse => {
+      if (jsonResponse.tracks) {
+        jsonResponse.tracks.map(track => {
+>>>>>>> parent of 56e914a... Added savePlaylist functionality in Spotify.js and App.js
           id: track.id,
           name: track.name,
           artist: track.artists[0].name,
           album: track.album.name,
           uri: track.uri
+<<<<<<< HEAD
         }));
       } else {
         return [];
@@ -120,3 +130,10 @@ const Spotify = {
 }
 
 export default Spotify;
+=======
+        })
+      }
+    })
+  }
+}
+>>>>>>> parent of 56e914a... Added savePlaylist functionality in Spotify.js and App.js
