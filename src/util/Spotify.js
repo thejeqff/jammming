@@ -7,6 +7,8 @@ const scope = 'scope=playlist-modify-public'
 const redirectUri = 'redirect_uri=http://localhost:3000/';
 const redirect = `${urlStart}?${clientId}&${responseType}&${scope}&${redirectUri}`;
 
+const searchUrl = 'https://api.spotify.com/v1/search?type=track&q='
+
 const Spotify = {
   getAccessToken() {
     if (accessToken) {
@@ -21,5 +23,15 @@ const Spotify = {
     } else {
       window.location = redirect;
     }
-  };
+  }
+
+  search(searchTerm) {
+    return fetch(`${searchUrl}${searchTerm}`, {
+      Authorization: `Bearer ${accessToken}`
+    }).then(response => {
+      return response.json();
+    }).then(jsonResponse => {
+      if (jsonResponse.track)
+    })
+  }
 }
