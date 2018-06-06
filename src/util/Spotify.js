@@ -28,6 +28,7 @@ const Spotify = {
   },
 
   search(searchTerm) {
+    Spotify.getAccessToken();
     return fetch(`${searchUrl}${searchTerm}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
@@ -53,7 +54,9 @@ const Spotify = {
     if (!playlistName || !trackURIs) {
       return;
     }
-    let currentAccessToken = accessToken;
+    const sendPlaylistName = JSON.stringify({name: playlistName});
+    const sendTracks = JSON.stringify({uris: trackURIs});
+    const currentAccessToken = Spotify.getAccessToken();
     let userId = '';
     let playlistID = '';
 
@@ -66,7 +69,6 @@ const Spotify = {
     if (response.ok) {
       const jsonResponse = await response.json();
       userId = jsonResponse.id;
-      console.log(userId)
     }
   } catch(error) {
     console.log(error)
@@ -80,9 +82,7 @@ const Spotify = {
         Authorization: `Bearer ${currentAccessToken}`,
         'Content-type': 'application/json'
       },
-      body: {
-        name: playlistName
-      },
+      body: sendPlaylistName,
       method: 'POST'
     })
     if (response.ok) {
@@ -103,9 +103,7 @@ const Spotify = {
         Authorization: `Bearer ${currentAccessToken}`,
         'Content-type': 'application/json'
       },
-      body: {
-        uris: trackURIs
-      }
+      body: sendTracks
     })
     if (response.ok) {
       const jsonResponse = response.json();
